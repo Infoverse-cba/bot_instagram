@@ -453,3 +453,29 @@ d@https://static.cdninstagram.com/rsrc.php/v3iVax4/yv/l/pt_BR/WuNsUivSnjE.js?_nc
 
 1699711956497	Marionette	INFO	Stopped listening on port 54099
 Dynamically enable window occlusion 1
+1699724798981	geckodriver	INFO	Listening on 127.0.0.1:57882
+1699724802022	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "57883" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\vitor\\AppData\\Local\\Temp\\rust_mozprofilet4kapI"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1699724802338	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1699724802429	Marionette	INFO	Listening on port 57892
+WebDriver BiDi listening on ws://127.0.0.1:57883
+Read port: 57892
+1699724802591	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:57883/devtools/browser/ceabb278-8194-4188-b0cb-c1236aaad0fe
+JavaScript warning: https://static.cdninstagram.com/rsrc.php/v3ioaI4/ya/l/pt_BR/hki0Lrt6nPL.js?_nc_x=Ij3Wp8lg5Kz, line 71: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.instagram.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.instagram.com."
+JavaScript warning: https://static.cdninstagram.com/rsrc.php/v3ioaI4/ya/l/pt_BR/hki0Lrt6nPL.js?_nc_x=Ij3Wp8lg5Kz, line 71: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1699724832365	addons.xpi	ERROR	System addon update list error SyntaxError: XMLHttpRequest.open: 'http://%(server)s/dummy-system-addons.xml' is not a valid URL.
+JavaScript warning: https://static.cdninstagram.com/rsrc.php/v3ioaI4/ya/l/pt_BR/hki0Lrt6nPL.js?_nc_x=Ij3Wp8lg5Kz, line 71: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://static.cdninstagram.com/rsrc.php/v3iVax4/yv/l/pt_BR/WuNsUivSnjE.js?_nc_x=Ij3Wp8lg5Kz, line 958: Script terminated by timeout at:
+E@https://static.cdninstagram.com/rsrc.php/v3iVax4/yv/l/pt_BR/WuNsUivSnjE.js?_nc_x=Ij3Wp8lg5Kz:958:2007
+C@https://static.cdninstagram.com/rsrc.php/v3iVax4/yv/l/pt_BR/WuNsUivSnjE.js?_nc_x=Ij3Wp8lg5Kz:958:1674
+i._initialize/<@https://static.cdninstagram.com/rsrc.php/v3iVax4/yv/l/pt_BR/WuNsUivSnjE.js?_nc_x=Ij3Wp8lg5Kz:958:4947
+d@https://static.cdninstagram.com/rsrc.php/v3iVax4/yv/l/pt_BR/WuNsUivSnjE.js?_nc_x=Ij3Wp8lg5Kz:959:158
+
+1699725013814	Marionette	INFO	Stopped listening on port 57892
+Dynamically enable window occlusion 1
+!!! error running onStopped callback: TypeError: callback is not a function
