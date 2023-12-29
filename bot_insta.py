@@ -8,14 +8,16 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait 
 from time import sleep
+from tqdm import tqdm
 
-class bot_face():
-    def __init__(self, cred_login, cred_senha):
+class bot_insta():
+    def __init__(self, cred_login, cred_senha, headless=False):
         options = webdriver.FirefoxOptions()
-        options.add_argument("-headless")
 
-        # self.driver = webdriver.Firefox(options=options)
-        self.driver = webdriver.Firefox()
+        if headless: options.add_argument("-headless")
+
+        self.driver = webdriver.Firefox(options=options)
+
         self.cred_login = cred_login
         self.cred_senha = cred_senha
         sleep(3)
@@ -75,13 +77,13 @@ class bot_face():
 
         sleep(3)
 
-        self.driver.find_element(by=By.NAME, value='username').send_keys(self.cred_login)
-        self.driver.find_element(by=By.NAME, value='password').send_keys(self.cred_senha)
+        element = self.driver.find_element(by=By.NAME, value='username')
+        self.digitar(element, self.cred_login)
+        element = self.driver.find_element(by=By.NAME, value='password')
+        self.digitar(element, self.cred_senha)
         self.driver.find_element(by=By.XPATH, value='//*[@id="loginForm"]/div/div[3]/button/div').click()
 
         sleep(3)
-
-        # self.driver.get('https://www.instagram.com/')
 
         try:
             self.driver.find_element(by=By.XPATH, value='/html/body/div[4]/div/div/div/div[3]/button[2]').click()
@@ -95,10 +97,12 @@ class bot_face():
     def search_keyword(self, keyword):
         print(f'Pesquisando por: {keyword}...')
         sleep(4)
-        self.driver.get('https://www.facebook.com/search/posts?q='+keyword)
+        self.driver.get('https://www.instagram.com/'+ keyword +'/')
+        sleep(4)
 
+        
     @time_out(time_out=10, raise_exception=False)
-    def get_post_links(self, n_posts=20):
+    def get_post_links(self, n_posts=12):
         print('Obtendo links dos posts...')
         self.post_links = list()
         sleep(10)
@@ -106,7 +110,7 @@ class bot_face():
 
         while True:
             script_n_posts = f""" 
-                                var n_posts = document.getElementsByClassName('x1yztbdb x1n2onr6 xh8yej3 x1ja2u2z').length
+                                var n_posts = document.getElementsByClassName('_aabd _aa8k  _al3l').length
                                 return n_posts
                               """
             
@@ -118,7 +122,6 @@ class bot_face():
 
             elif n_scroll > 50:
                 print(f"foram encontrados o total de {n_posts_browser} posts de {n_posts}")
-                
                 break
 
             else:
@@ -130,7 +133,7 @@ class bot_face():
         # self.driver.execute_script("window.scrollBy(0,6150)")
 
         script = f""" 
-                    var results = document.getElementsByClassName('x1i10hfl xjbqb8w x6umtig x1b1mbwd xaqea5y xav7gou x9f619 x1ypdohk xt0psk2 xe8uvvx xdj266r x11i5rnm xat24cr x1mh8g0r xexx8yu x4uap5 x18d9i69 xkhd6sd x16tdsg8 x1hl2dhg xggy1nq x1a2a7pz x1heor9g xt0b8zv xo1l8bm')
+                    var results = document.getElementsByClassName('_aabd _aa8k  _al3l')
                     return results
                   """
         
@@ -142,21 +145,20 @@ class bot_face():
 
         for element in elements:
             try:
-                href = element.get_attribute('href')
-                if '#' in href:
-                    element.click()
-                    href = element.get_attribute('href')
-                else: continue
+                element.click()
+                # pega a url do post
+                url = self.driver.current_url
+                self.driver.back()
                 
             except:
                 self.driver.execute_script("window.scrollBy(0,1150)")
                 sleep(1)
                 element.click()
                 sleep(1)
-                href = element.get_attribute('href')
+                url = self.driver.current_url
 
-            if href not in self.post_links:
-                self.post_links.append(href)
+            if url not in self.post_links:
+                self.post_links.append(url)
 
             if len(self.post_links) == n_posts:
                 break
@@ -180,6 +182,11 @@ class bot_face():
             info.append([link, link])
 
         self.data = pd.DataFrame(info, columns=['link', 'publication_id'])
+
+    def digitar(self, elemento, texto):
+        for letra in texto:
+            elemento.send_keys(letra)
+            sleep(0.2)
 
 def execute_sql(sql, data = None, fetch=False):
     try:
@@ -254,14 +261,14 @@ def verificando_busca_avulsa():
 def executar_busca(id, cred_login, cred_senha, keyword):
     print('executando busca...')
 
-    bot = bot_face(cred_login, cred_senha)
+    bot = bot_insta(cred_login, cred_senha, headless=False)
     bot.login()
 
     sleep(5)
 
-    # bot.search_keyword(keyword)
-    # bot.get_post_links()
-    # bot.get_information()
+    bot.search_keyword(keyword)
+    bot.get_post_links()
+    bot.get_information()
 
     # inserir_db(bot.get_data(), id)
        
@@ -333,11 +340,11 @@ if __name__ == '__main__':
     print('Verificando busca avulsa')
     
     # while True:
-    cred_login = 'vitor_custodio22'
-    cred_senha = 'vitorjipa22'
+    cred_login = 'vitor_custodio2@hotmail.com'
+    cred_senha = '20679612'
     time.sleep(10)
     # verificando_busca_avulsa()
-    executar_busca(1, cred_login, cred_senha, 'amor')
+    executar_busca(1, cred_login, cred_senha, 'kingjames')
 
 
 
